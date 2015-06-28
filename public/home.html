@@ -1,0 +1,26 @@
+<div ng-controller="ListController">
+<div class="categories" ng-controller="CategoryController">
+  <ul ng-repeat="category in categories">  
+    <li ng-click="sendCategory(category)">{{category.name}}</li>
+  </ul>
+</div>
+
+<div class="tabs" ng-controller="tabsController">
+  <ul>
+      <li ng-click="tab(1)">Recent items</li>
+      <li ng-click="tab(2)">Popular items</li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="left" ng-controller="ItemController">
+    <div class="itemList">
+    	<div class="item" ng-repeat="item in items | filter:search | orderBy:sort">	
+  			<h3 ng-click="viewDetail(item)">{{item.title}} - {{item.date}}</h3>
+  			<p>{{item.description}}</p>
+        <a ng-click="viewDetail(item)">View full item details</a>
+  		</div>
+    </div>
+  </div>
+</div>
+</div>

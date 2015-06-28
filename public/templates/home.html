@@ -1,0 +1,47 @@
+<div ng-controller="ListController">
+  <div class="categories" ng-controller="CategoryController">
+    <ul ng-repeat="category in categories">  
+      <div class="btn btn-default" ng-click="sendCategory(category)">{{category.name}}</div>
+    </ul>
+    <div class="well"><label ng-repeat="category in categories">
+      <input type="checkbox" checklist-model="item.categories" checklist-value="category.id"> {{category.name}}
+      </label></div>
+      <pre>{{item.categories|json}}</pre>
+
+      <label ng-repeat="category in categories">
+        <input
+          type="checkbox"
+          name="selectedFruits[]"
+          value="{{category}}"
+          ng-checked="selection.indexOf(category.id) > -1"
+          ng-click="toggleSelection(category.id)"
+        > {{category.name}}
+      </label>
+      <pre>{{selection|json}}</pre>
+  </div>
+
+  <div class="tabs">
+    <ul>
+      <li ng-click="tab(1)">Recent items</li>
+      <li ng-click="tab(2)">Popular items</li>
+    </ul>
+  </div>
+  <div class="btn btn-default" ng-click="checkAll()">Hepsini Seç</div>
+  <div class="btn btn-default" ng-click="uncheckAll()">Uncheck all</div>
+
+  <div class="container">
+    <div class="left" ng-controller="ItemController">
+      <div class="itemList">
+      	<div class="panel panel-default" ng-repeat="item in items |  filterWithOr:{category_id: selection} | orderBy:sort">
+          <div class="panel-heading">
+    			  <h3 ng-click="viewDetail(item)">{{item.title}}</h3>
+          </div>
+          <div class="panel-body">
+    			<p>{{item.description}}</p>
+          </div>
+          <a ng-click="viewDetail(item)">View full item details</a>
+    		</div>
+      </div>
+    </div>
+  </div>
+</div>
