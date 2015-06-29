@@ -3,11 +3,6 @@
     <ul ng-repeat="category in categories">  
       <div class="btn btn-default" ng-click="sendCategory(category)">{{category.name}}</div>
     </ul>
-    <div class="well"><label ng-repeat="category in categories">
-      <input type="checkbox" checklist-model="item.categories" checklist-value="category.id"> {{category.name}}
-      </label></div>
-      <pre>{{item.categories|json}}</pre>
-
       <label ng-repeat="category in categories">
         <input
           type="checkbox"
@@ -32,7 +27,7 @@
   <div class="container">
     <div class="left" ng-controller="ItemController">
       <div class="itemList">
-      	<div class="panel panel-default" ng-repeat="item in items |  filterWithOr:{category_id: selection} | orderBy:sort">
+        <div class="panel panel-default" ng-repeat="item in items | filter:{category_id:search } | filterWithOr:{category_id: selection} | orderBy:sort">
           <div class="panel-heading">
     			  <h3 ng-click="viewDetail(item)">{{item.title}}</h3>
           </div>

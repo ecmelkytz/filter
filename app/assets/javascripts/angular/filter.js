@@ -103,60 +103,44 @@ myApp.controller('ItemController', function($scope, $route, $location, $http, It
 })	
 
 myApp.controller('ListController', function($scope, $route, $location, $http, Categories){
+  $scope.selection = [];
+  Categories.get(function(response){
+    $scope.categories = response;
+    angular.forEach($scope.categories, function(location, key){
+      $scope.selection.push(location.id);
+    });
+  });
   
   $scope.sendCategory = function(category) {
     // How can I pass this value to ItemController?
      $scope.search =category.id;
   };
-  
-   $scope.orderProp='date';
    
-    $scope.tab = function (tabIndex) {
-     //Sort by date
-      if (tabIndex == 1){
-        //alert(tabIndex);
-        $scope.orderProp='date';
-      
-      }   
-      //Sort by views 
-      if (tabIndex == 2){
-        $scope.orderProp = 'views';
-      }
-      
-   };
-   
-   $scope.sort = function(item) {
-       if (  $scope.orderProp == 'date') {
-            return new Date(item.date);
-        }
-        return item[$scope.orderProp];
-   };
-
-  $scope.selection = [];
+  $scope.sort = function(item) {
+    if ($scope.orderProp == 'date') {
+      return new Date(item.date);
+    }
+      return item[$scope.orderProp];
+  };
 
   // toggle selection for a given fruit by name
   $scope.toggleSelection = function toggleSelection(category) {
     var idx = $scope.selection.indexOf(category);
-
-    // is currently selected
     if (idx > -1) {
       $scope.selection.splice(idx, 1);
     }
-
     // is newly selected
     else {
       $scope.selection.push(category);
     }
   };
-  
-})	
-
+});
 
 myApp.controller('CategoryController', function($scope, $route, $location, $http, Categories){
   Categories.get(function(response){
     $scope.categories = response;
   });
-})	
+});
 
 myApp.controller('ItemDetailController', function($scope, $route, $location, $http, Items){
     Items.get(function(response){
