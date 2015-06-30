@@ -1,0 +1,16 @@
+.container
+  .col-lg-8.col-lg-offset-3 style="margin-top:30px;"
+    = simple_form_for(@sss) do |f|
+      .panel.panel-primary
+        .panel-heading
+          h4 Soru Formu
+        .panel-body
+          .col-lg-4 style="padding:20px"
+            = f.input :question, label: "Soru"
+            = f.input :answer, label: "Cevap"
+            = f.association :categories, as: :check_boxes, label: "Kategoriler"
+        .panel-footer
+          center
+            = f.submit "Kaydet", class:"btn btn-default"
+            |  
+            = link_to 'Geri', ssses_path, class:"btn btn-default"

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Sss Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sss</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sss_categories.each do |sss_category| %>
+      <tr>
+        <td><%= sss_category.sss_id %></td>
+        <td><%= sss_category.category_id %></td>
+        <td><%= link_to 'Show', sss_category %></td>
+        <td><%= link_to 'Edit', edit_sss_category_path(sss_category) %></td>
+        <td><%= link_to 'Destroy', sss_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sss category', new_sss_category_path %>

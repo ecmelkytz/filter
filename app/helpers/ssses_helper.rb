@@ -1,0 +1,2 @@
+module SssesHelper
+end

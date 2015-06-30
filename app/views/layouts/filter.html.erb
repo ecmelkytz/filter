@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
   <title>Filter</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -9,6 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= yield %>
+
+ <ng-view></ng-view>
 </body>
 </html>

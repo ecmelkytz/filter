@@ -1,0 +1,32 @@
+<div ng-controller="ListController">
+  <div class="categories" ng-controller="CategoryController">
+    <label ng-repeat="category in categories">
+      <input
+        type="checkbox"
+        name="selectedFruits[]"
+        value="{{category}}"
+        ng-checked="selection.indexOf(category.id) > -1"
+        ng-click="toggleSelection(category.id)"
+      > {{category.name}}
+    </label>
+    <pre>{{selection|json}}</pre>
+  </div>
+
+  <div class="container">
+    <div class="left" ng-controller="SssController">
+      <div class="itemList">
+        <div ng-repeat="sss in ssses">
+          <div class="panel panel-default" ng-repeat="sss_category in sss_categories | filterWithOr:{category_id: selection, sss_id: sss.id}">
+            <div class="panel-heading">
+              <h3 ng-click="viewDetail(sss)">{{sss.question}}</h3>
+            </div>
+            <div class="panel-body">
+            <p>{{sss.answer}}</p>
+            </div>
+            <a ng-click="viewDetail(sss)">View full sss details</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

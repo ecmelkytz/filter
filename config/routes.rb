@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :sss_categories
+
+  resources :ssses
+
   resources :categories 
 
   resources :items

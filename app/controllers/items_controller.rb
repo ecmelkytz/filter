@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
+  layout 'filter'
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   respond_to :json, :html
+
 
   # GET /items
   # GET /items.json

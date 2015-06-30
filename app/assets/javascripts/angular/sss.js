@@ -1,16 +1,16 @@
-var myApp = angular.module('myApp', ['ngRoute', 'sssApp']);
+var sssApp = angular.module('sssApp', ['ngRoute', 'myApp']);
 
-myApp.factory('Items', ['$http', function($http){
+sssApp.factory('Ssses', ['$http', function($http){
   return {
     get: function(callback){
-      $http.get('items.json').success(function(data){
+      $http.get('ssses.json').success(function(data){
         callback(data);
       })
     }
   }
 }]);
 
-myApp.factory('Categories', ['$http', function($http){
+sssApp.factory('Categories', ['$http', function($http){
   return {
     get: function(callback){
       $http.get('categories.json').success(function(data){
@@ -20,22 +20,29 @@ myApp.factory('Categories', ['$http', function($http){
   }
 }]);
 
-// Config and Routes 
-myApp.config(['$routeProvider', function($routeProvider){
-  $routeProvider
-		.when('/home', {
-				templateUrl:"templates/filter/home.html"
-		})
-		.when('/item/:id', {
-				templateUrl:"item.html"
-		})
-    .otherwise({
-      redirectTo: '/home'
-      });
+sssApp.factory('SssCategories', ['$http', function($http){
+  return {
+    get: function(callback){
+      $http.get('sss_categories.json').success(function(data){
+        callback(data);
+      })
+    }
+  }
 }]);
 
+// Config and Routes 
+sssApp.config(['$routeProvider', function($routeProvider){
+  $routeProvider
+    .when('/ssses', {
+        templateUrl:"/templates/sss/index.html"
+    })
+    .when('/ssses/:id', {
+        templateUrl:"show.html"
+    });
+  }
+]);
 
-myApp.filter('filterWithOr', function ($filter) {
+sssApp.filter('filterWithOr', function ($filter) {
   var comparator = function (actual, expected) {
     if (angular.isUndefined(actual)) {
       // No substring matching against `undefined`
@@ -70,34 +77,7 @@ myApp.filter('filterWithOr', function ($filter) {
   };
 });
 
-// Controllers
-myApp.controller('ItemController', function($scope, $route, $location, $http, Items){
-	
-  Items.get(function(response){
-    $scope.items = response;
-  });
-  
-  // Update this value dynamically - onclick
-  $scope.filters = "";
-
-  $scope.viewDetail = function(item) {
-		$location.path('/item/' + item.id);
-	}
-
-  $scope.item = {
-    categories: []
-  }
-
-  $scope.checkAll = function() {
-    $scope.item.categories = $scope.categories.map(function(item) { return item.id; });
-  };
-
-   $scope.uncheckAll = function() {
-    $scope.item.categories = [];
-  };
-})	
-
-myApp.controller('ListController', function($scope, $route, $location, $http, Categories){
+sssApp.controller('ListController', function($scope, $route, $location, $http, Categories){
   $scope.selection = [];
   Categories.get(function(response){
     $scope.categories = response;
@@ -137,20 +117,26 @@ myApp.controller('CategoryController', function($scope, $route, $location, $http
   });
 });
 
-myApp.controller('ItemDetailController', function($scope, $route, $location, $http, Items){
-    Items.get(function(response){
-    $scope.items = response; 
+myApp.controller('SssController', function($scope, $route, $location, $http, Ssses, SssCategories){
   
-    if ($route.current.params.id) {
-      angular.forEach($scope.items, function (v, k) {
-        if (v.id == $route.current.params.id) {
-          $scope.currItem = $scope.items[k];
-          return false;
-        }
-      });
-    }
+  Ssses.get(function(response){
+    $scope.ssses = response;
   });
-})
 
+  SssCategories.get(function(response){
+    $scope.sss_categories = response;
+    console.log($scope.sss_categories);
+  });
+  
+  // Update this value dynamically - onclick
+  $scope.filters = "";
 
+  $scope.viewDetail = function(item) {
+    $location.path('/item/' + item.id);
+  }
 
+  $scope.item = {
+    categories: []
+  }
+
+});
