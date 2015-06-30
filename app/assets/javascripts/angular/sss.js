@@ -111,16 +111,17 @@ sssApp.controller('ListController', function($scope, $route, $location, $http, C
   };
 });
 
-myApp.controller('CategoryController', function($scope, $route, $location, $http, Categories){
+sssApp.controller('CategoryController', function($scope, $route, $location, $http, Categories){
   Categories.get(function(response){
     $scope.categories = response;
   });
 });
 
-myApp.controller('SssController', function($scope, $route, $location, $http, Ssses, SssCategories){
+sssApp.controller('SssController', function($scope, $route, $location, $http, Ssses, SssCategories){
   
   Ssses.get(function(response){
     $scope.ssses = response;
+     console.log($scope.ssses[0]);
   });
 
   SssCategories.get(function(response){
