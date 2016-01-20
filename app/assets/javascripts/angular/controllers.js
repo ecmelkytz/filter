@@ -22,14 +22,6 @@ app.controller('ListController', function($scope, $route, $location, $http, Cate
     $scope.search = '';
   }
 
-  $scope.sort = function(item) {
-    if ($scope.orderProp == 'date') {
-      return new Date(item.date);
-    }
-      return item[$scope.orderProp];
-  };
-
-  // toggle selection for a given fruit by name
   $scope.toggleSelection = function toggleSelection(category) {
     var idx = $scope.selection.indexOf(category);
     if (idx > -1) {
@@ -47,15 +39,3 @@ app.controller('CategoryController', function($scope, $route, $location, $http, 
     $scope.categories = response;
   });
 });
-
-
-// Config and Routes
-app.config(['$routeProvider', function($routeProvider){
-  $routeProvider
-		.when('/home', {
-				templateUrl:"templates/filter/home.html"
-		})
-    .otherwise({
-      redirectTo: '/home'
-      });
-}]);
