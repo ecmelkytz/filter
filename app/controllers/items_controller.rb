@@ -1,5 +1,7 @@
+# encoding: utf-8
+
 class ItemsController < ApplicationController
-  layout 'filter'
+  layout 'others'
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   respond_to :json, :html
 

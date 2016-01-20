@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
 <head>
   <title>Filter</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"%>
-  
+
   <%= csrf_meta_tags %>
 </head>
-<body>
-
- <ng-view></ng-view>
+<body style="background-color:#585858">
+  <div class="container" style="background-color:#D8D8D8">
+    <%= render "shared/header" %>
+    <div class="col-md-8 col-md-offset-2" style="margin-bottom:50px">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

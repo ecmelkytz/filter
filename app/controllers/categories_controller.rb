@@ -1,5 +1,7 @@
+# encoding: utf-8
+
 class CategoriesController < ApplicationController
-  layout 'filter'
+  layout 'others'
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories

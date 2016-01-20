@@ -35,11 +35,4 @@ ActiveRecord::Schema.define(version: 20150629064641) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "ssses", force: :cascade do |t|
-    t.string   "question"
-    t.text     "answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end

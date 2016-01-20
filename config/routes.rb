@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  resources :sss_categories
 
-  resources :ssses
-
-  resources :categories 
-
+  resources :categories
   resources :items
 
-  root to: 'items#index'
+  root 'homes#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
